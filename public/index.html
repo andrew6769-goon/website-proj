@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Message</title>
+  <style>
+    body {
+      background: #0f172a;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      margin-top: 150px;
+    }
+
+    input {
+      padding: 12px;
+      width: 300px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      transform: scale(1.05);
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #22c55e;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      background: #16a34a;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>💬 Send a message</h2>
+
+  <input id="msg" placeholder="Type something..." />
+  <br>
+  <button onclick="send()">Send</button>
+
+  <script>
+    function send() {
+      const message = document.getElementById("msg").value;
+
+      fetch("/send", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ message })
+      }).then(() => {
+        alert("Message sent");
+        document.getElementById("msg").value = "";
+      });
+    }
+  </script>
+
+</body>
+</html>
